@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Binary to Decimal</title>
+</head>
+<body>
+  <h1>Binary to Decimal Converter</h1>
+  <p>Input a binary number(<small>not more than 8 digits</small>) and get it's decimal equivalent</p>
+  <span id="error"></span>
+  <form>
+    <input type="text" name="binary" id="binary" placeholder="Type binary here">
+    <button type="button" onclick=`${handleClick()}`>Get Decimal</button>
+  </form>
+  <p id="result"></p>
+  <script>
+    let errContainer = document.getElementById("error");
+    let resultPara = document.getElementById("result");
+    //function to handle button click
+     handleClick = () => {
+      let bin = document.getElementById("binary").value;
+      let errmsg = "";
+      const checkBin = binary => {
+      let isBinary = true;
+      const binArr = bin.split("");
+      for(let i = 0; i < binArr.length; i++){
+        if(binArr[i] > 1) {
+          isBinary = false;
+          break;
+        }
+      };
+      return isBinary;
+    };
+      // input validation
+      if(bin.length === 0){
+        errmsg = "You must enter at least one binary digit";
+      }else if(bin.length > 8) {
+        errmsg = "Your input should not be more than 8 digits.";
+      } else if(checkBin(bin) === false){
+        errmsg = "Not a binary number";
+      };
+
+      if(errmsg){
+        resultPara.textContent = "";
+        errContainer.textContent = errmsg;
+      } else {
+        errContainer.textContent = "";
+        resultPara.textContent = `The decimal equivalent is ${parseInt(bin, 2)}`;
+      }
+    }
+  </script>
+</body>
+</html>
